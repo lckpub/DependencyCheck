@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>开源供应链信息</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style1.css') }}"/>
+</head>
+<body>
+<div id="outer">
+	<div id="header">
+		<h1><a href="#">开源供应链信息</a></h1>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="http://202.121.180.97:30088/" accesskey="1" title="">Home</a></li>
+			<li><a href="http://202.121.180.97:30088/result?file={{file}}" accesskey="2" title="">开源供应链信息</a></li>
+			<li><a href="http://202.121.180.97:30088/licenses?file={{file}}" accesskey="3" title="">许可证信息</a></li>
+			<li><a href="http://202.121.180.97:30088/cves?file={{file}}" accesskey="4" title="">CVE漏洞</a></li>
+			<li><a href="http://202.121.180.97:30088/legitimacy?file={{file}}" accesskey="5" title="">合规性分析</a></li>
+		</ul>
+	</div>
+  <div id="content">
+		<div id="tertiaryContent">
+			
+		</div>
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+				<h2>python调用信息</h2>
+				</ul>
+				<table>
+					<tr class="rowH">
+						<th>调用信息</th>
+            <th>版本信息(上传requirements.txt提供)</th>
+						<th>许可证信息链接</th>
+						<th>CVE漏洞链接</th>
+					</tr>
+          {%for content in contents%}
+					<tr class="rowB">
+						<td>{{content[0]}}</td>
+						<td>{{content[1]}}</td>
+						<td><a href="http://202.121.180.97:30088/license?pack={{content[0]}}">license for {{content[0]}}</a></td>
+            <td><a href="http://202.121.180.97:30088/cve?pack={{content[0]}}">CVEs for {{content[0]}}</a></td>
+					</tr>
+          {%endfor%}
+				</table>
+			</div>
+		</div>
+		<div id="secondaryContent">
+			<h3>这里展示上传的项目中代码文件（目前支持python）的供应链信息</h3>
+			<p>
+			为了让供应链信息更准确，调用信息中的包是通过对项目进行源代码分析得到，和requirements.txt中的包名称无关。若是找到的包无法在
+			requirements.txt中找到版本(原因可能是少数包名称不匹配，requirements无法找到该包等等)，会在版本中显示None。
+			</p>
+			<p>包和版本旁可以通过链接查看该包的许可证和CVE漏洞信息。</br></br>
+				<strong>若版本为None，则会对所有版本信息进行查找，会导致针对该包以及整个项目的漏洞查询较慢，需要耐心等待。</strong></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>by 贪得吴彦组</p>
+	</div>
+    </div>
+</body>
+</html>

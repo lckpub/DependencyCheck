@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>license info</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style2.css') }}"/>
+</head>
+<body>
+<div id="outer">
+	<div id="header">
+		<h1><a href="#">许可证信息</a></h1>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="http://202.121.180.97:30088/" accesskey="1" title="">Home</a></li>
+			<li><a href="http://202.121.180.97:30088/result?file={{file}}" accesskey="2" title="">开源供应链信息</a></li>
+			<li><a href="http://202.121.180.97:30088/licenses?file={{file}}" accesskey="3" title="">许可证信息</a></li>
+			<li><a href="http://202.121.180.97:30088/cves?file={{file}}" accesskey="4" title="">CVE漏洞</a></li>
+			<li><a href="http://202.121.180.97:30088/legitimacy?file={{file}}" accesskey="5" title="">合规性分析</a></li>
+		</ul>
+	</div>
+  <div id="content">
+    <div id="primaryContentContainer">
+		<div id="primaryContent">
+			<h2>关于{{pack}} {{ver}}的许可证信息</h2>
+            {%if flag==False%}
+                <h3>未能找到该包的相关的许可证信息</h3>
+            {%else%}
+            <ul>
+                {%for i in counter%}
+                <li>
+                    <h3>许可证名：{{summary[i]['name']}}</h3>
+                    <h3>信息</h3>
+                    <table>
+                        <tr class="rowH">
+                          <th>License name</th>
+                          <th>Category</th>
+                          <th>Type</th>
+                          <th>Primary license or not</th>
+                          <th>Network Redistribution</th>
+                          <th>Non-Commercial Use Only</th>
+                          <th>Source Redistribution</th>
+                        </tr>
+                        <tr class="rowB">
+                            <td><em>{{summary[i]['name']}}</em></br>short:{{summary[i]['short_name']}}</br>key:{{summary[i]['key']}}</td>
+                            <td>{{summary[i]['category']}}</td>
+                            <td>{{summary[i]['type']}}</td>
+                            <td>{{summary[i]['is_primary']}}</td>
+                            <td>{{detail[i]['tags']['Network Redistribution']}}</td>
+                            <td>{{detail[i]['tags']['Non-Commercial Use Only']}}</td>
+                            <td>{{detail[i]['tags']['Source Redistribution']}}</td>
+                          </tr>  
+                    </table>
+                </li>
+                {%endfor%}
+            </ul>
+            {%endif%}
+			
+			</div>
+		</div>
+    <div id="secondaryContent">
+			<h3>这里展示相应包调用的许可证信息</h3>
+			<p>由于数据库大小、包或版本本身等原因，并不是所有包都能查找到许可证信息。</p>
+			<ul>
+				许可证信息包括：
+				<li>许可证名（包括简称，查找键值）</li>
+				<li>类型，归属</li>
+				<li>一个包若有多个许可证，其主次关系</li>
+				<li>部分许可信息，包括是否有发布限制以及是否允许商用</li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+  <div id="footer">
+		<p>by 贪得吴彦组</p>
+	</div>    
+</div>
+</body>
+</html>

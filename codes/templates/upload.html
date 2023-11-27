@@ -1,0 +1,148 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>Home</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style3.css') }}"/>
+<style>
+    #search_submit {
+        outline: 0;
+        height: 40px;
+        float: right;
+        color: #125;
+        font-size: 18px;
+        font-weight: 500;
+        border: none;
+        background-color: transparent;
+        padding: 0 13px 0 13px
+     }
+     .button {
+      position: relative;
+      background-color: #ffffff;
+      border:2px solid #008cba;
+      border-radius:8px;
+      font-size: 15px;
+      color:  #87cefa;
+      padding: 10px 20px;
+      margin: 4px 2px;
+      text-align: center;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      text-decoration: none;
+      overflow: hidden;
+      cursor: pointer;
+  }
+   
+  .button:after {
+      content: "";
+      background: #a9a9a9;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -20px!important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s
+  }
+   
+  .button:active:after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s
+  }  
+  
+</style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="header">
+            <h1><a href="#">主页</a></h1>
+        </div>
+        <div id="content">
+            <div id="tertiaryContent">
+                <h3>特色介绍</h3>
+                <p>软件供应链是影响软件安全的关键因素之一。
+                    其中，开源软件是整个软件供应链体系中非常重要而又薄弱的环节，开源许可证是开展开源软件开发和技术创新的基石。
+                    面对国家和市场对软件供应链安全的需求，本产品提供软件供应链许可协议及漏洞分析的功能。
+                </p>
+                <ul>
+                    <li>供应链分析方面，采用源代码分析的方式。</li>
+                    <li>在供应链安全方面，我们重视漏洞分析，并提供漏洞信息查询的服务。</li>
+                    <li>鉴于如今出现了多起由于许可证冲突引发的合规性问题，针对供应链安全我们还提供许可证分析和合规性介绍的服务。</li>
+                </ul>
+            </div>
+            <div id="primaryContentContainer">
+                    <div id="primaryContent">
+                        <h1 style="text-align:center">请在此处上传文件压缩包</h1>
+                    </br></br>
+                    <form action = "uploader" method = "POST" enctype = "multipart/form-data" style="text-align:center">
+                        <input type = "file" name = "file" />
+                        请选择许可证类型：<select name="license">
+                            <option>agpl-1.0-plus</option>
+                            <option>agpl-3.0</option>
+                            <option>agpl-3.0-plus</option>
+                            <option>apache-2.0</option>
+                            <option>bsd-new</option>
+                            <option>bsd-original</option>
+                            <option>bsd-simplified</option>
+                            <option>epl-1.0</option>
+                            <option>epl-2.0</option>
+                            <option selected="selected">gpl-2.0</option>
+                            <option>gpl-2.1-plus</option>
+                            <option>gpl-3.0</option>
+                            <option>gpl-3.0-plus</option>
+                            <option>ibpng</option>
+                            <option>lgpl-2.1</option>
+                            <option>lgpl-2.1-plus</option>
+                            <option>lgpl-3.0</option>
+                            <option>lgpl-3.0-plus</option>
+                            <option>mit</option>
+                            <option>mpl-1.1</option>
+                            <option>mpl-2.0</option>
+                            <option>mulanpsl-2.0</option>
+                            <option>mulanpubl-2.0</option>
+                            <option>zlib</option>
+                            <option>zpl-2.0</option>
+                        </select>
+                    </br></br>
+                        <button type="submit" class="button" id="submit_file_button">扫描压缩包或文件</button>
+                     </form></br></br>
+                    <ul>
+                    
+                    <h2>注意</h2>
+                    <li><strong>为鉴别供应链的版本，请将requirements.txt一并压缩上传（路径不重要）</strong></li>
+                    <li><strong>为了让requirements.txt的格式统一，并效果更好，请使用pipreqs生成该文件</strong></li>
+                    <li><strong>若项目较大，源代码分析可能会用较长时间，请耐心等待</strong></li>
+                    <li><strong>关于许可证选择，可以参考下图</strong></li>
+                    </ul>
+                    <div align="center">
+                    <img src="{{ url_for('static', filename = 'images/types.png') }}" width="550" height="300"/>
+                    </div>
+                    </div>
+                </div>
+            <div id="secondaryContent">
+                <h3>本作品的功能是通过源代码分析检测项目供应链，并对其进行许可及漏洞分析，目前支持python项目</h3>
+                <h3>指南</h3>
+                <ul>
+                    <li>将项目打包成压缩包上传，推荐<em>rar或zip格式</em></li>
+                    <li>会对项目中的代码文件进行分析，并展示供应链信息</li>
+                    <li>每一条调用信息中，会显示版本（若能查找到），该包的许可证信息和CVE漏洞信息的超链接</li>
+                    <li>得到供应链信息之后，可以通过界面上方的功能栏查看许可分析，整体的漏洞信息和合规性介绍</li>
+                    
+                </ul>
+                
+            </div>
+            <div class="clear"></div>
+          <div id="footer">
+                <p>by 贪得吴彦组</p>
+            </div>    
+   </div>
+</body>
+</html>
+   

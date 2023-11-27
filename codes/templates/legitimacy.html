@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>legitimacy</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style4.css') }}"/>
+</head>
+<body>
+    <div id="outer">
+        <div id="header">
+            <h1><a href="#">合规性介绍</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="first"><a href="http://202.121.180.97:30088/" accesskey="1" title="">Home</a></li>
+                <li><a href="http://202.121.180.97:30088/result?file={{file}}" accesskey="2" title="">开源供应链信息</a></li>
+                <li><a href="http://202.121.180.97:30088/licenses?file={{file}}" accesskey="3" title="">许可证信息</a></li>
+                <li><a href="http://202.121.180.97:30088/cves?file={{file}}" accesskey="4" title="">CVE漏洞</a></li>
+                <li><a href="http://202.121.180.97:30088/legitimacy?file={{file}}" accesskey="5" title="">合规性分析</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="tertiaryContent">
+                <h3>相关案例</h3>
+                <p>
+                    最近的Artifex诉Hancom案就是一起外国公司在美国被美国公司起诉的案例。</br></br>
+                    其案情为：美国的Artifex公司拥有并发布了一款名为Ghostscript的pdf软件。针对该软件，Artifex公司提供了两种许可方式：商用许可或者GPL下的开源许可。
+                    韩国的Hancom公司将Ghostscript整合进其Hangul软件中，但其并没有从Artifex公司购买商用许可，也没有根据GPL许可证将整合有Ghostscript的Hangul软件开源，因此违反了GPL许可证。
+                </br></br>2016年12月，Artifex公司在加州北区联邦法院起诉Hancom公司版权侵权以及违反开源软件许可证。
+                    Hancom公司提出了撤销案件的动议，包括原告不能针对被告在美国境外的侵权行为根据美国版权法提起诉讼。
+                    2017年4月，法院否决了被告的动议并认为“至少有一些侵权行为是在美国发生的”并且“美国的行为与境外侵权之间存在必要的联系”。
+                    2017年年底，双方达成庭外和解。
+                </p>
+                
+            </div>
+            <div id="primaryContentContainer">
+                <div id="primaryContent">
+                    <h2>典型的不兼容许可证介绍</h2>
+                    <ul>
+                        <li>
+                        <strong>基于开源许可证推导图的兼容性分析和开源许可证不兼容原因分析表的联合分析可以大大降低项目侵犯合同和著作权的风险。</strong>
+                        </li>
+                        <li>
+                        <strong>在下表中提到的开源许可证中，GPL、AGPL属于强著佐权许可证，
+                            LGPL、EPL、MPL属于弱著佐权许可证，mit、BSD、Apache属于宽松许可证。</strong>
+                        </li>
+                    </ul>
+                    <table>
+                        <tr class="rowH">
+                            <th>开源许可证</th>
+                            <th>项目许可证</th>
+                            <th>不兼容原因</th>
+                            <th>项目中是否存在</th>
+                        </tr>
+                        <tr class="rowA">
+                            <td>gpl-2.0</td>
+                            <td>gpl-3.0或gpl-3.0-plus</td>
+                            <td>GPLv2本身不与GPLv3兼容</td>
+                            <td>{{exist[0]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>gpl-2.0</td>
+                            <td>agpl-3.0或agpl-3.0-plus</td>
+                            <td>AGPL不兼容GPLv2</td>
+                            <td>{{exist[1]}}</td>
+                        </tr>
+                        <tr class="rowA">
+                            <td>gpl-3.0或gpl-3.0-plus</td>
+                            <td>gpl-2.0</td>
+                            <td>GPLv3本身不与GPLv2兼容</td>
+                            <td>{{exist[2]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>agpl-3.0或agpl-3.0-plus</td>
+                            <td>任何gpl</td>
+                            <td>AGPL不兼容GPL,不能按照 GPLv3 的条款获取在 AGPL 下发布的代码并按照您喜欢的方式传递或修改它,反之亦然</td>
+                            <td>{{exist[3]}}</td>
+                        </tr>
+                        <tr class="rowA">
+                            <td>epl-1.0</td>
+                            <td>gpl/agpl/lgpl</td>
+                            <td>epl作为弱copyleft许可证的属性和选择使用法律条款限制</td>
+                            <td>{{exist[4]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>epl-2.0</td>
+                            <td>gpl/agpl/lgpl</td>
+                            <td>epl作为弱copyleft许可证的属性和选择使用法律条款限制款（如果初始贡献者在分发时指明以 GPLv2 或更新版本作为次级许可证时兼容 GPL）</td>
+                            <td>{{exist[5]}}</td>
+                        </tr>
+                        <tr class="rowA">
+                            <td>mpl-1.1</td>
+                            <td>gpl/agpl/lgpl</td>
+                            <td>任何一个GPL模块和一个MPLv1.1模块不能合法连接到一起。这意味着只能在MPL以前版本下可用的软件仍然与GPL和AGPL不兼容</td>
+                            <td>{{exist[6]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>mpl-2.0</td>
+                            <td>mpl-1.1</td>
+                            <td>MPLv1.1中缺少MPLv2.0的3.3条款</td>
+                            <td>{{exist[7]}}</td>
+                        </tr>
+                        <tr class="rowA">
+                            <td>bsd-simplified(BSD 2-Clause)</td>
+                            <td>mit</td>
+                            <td>MIT 许可证允许在没有贡献积分的情况下发布,而 BSD 许可证则不允许</td>
+                            <td>{{exist[8]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>bsd-new(BSD 3-Clause)</td>
+                            <td>mit</td>
+                            <td>MIT 许可证允许在没有贡献积分的情况下发布,而 BSD 许可证则不允许</td>
+                            <td>{{exist[9]}}</td>
+                        </tr>
+                        <tr class="rowA">
+                            <td>apache-2.0</td>
+                            <td>mpl-1.1</td>
+                            <td>MPLv1.1的第13条在Apache v2.0中不存在</td>
+                            <td>{{exist[10]}}</td>
+                        </tr>
+                        <tr class="rowB">
+                            <td>apache-2.0</td>
+                            <td>gpl-2.0</td>
+                            <td>Apache v2.0与GPLv2.0不兼容,因为它有一些在该GPL版本中没有的要求.这些条款包括某些专利终止和赔偿条款</td>
+                            <td>{{exist[11]}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="secondaryContent">
+                <h3>许可证相关权利</h3>
+                <ul>
+                <li><strong>合同和著作权</strong></li>
+                <p>我国，开源软件许可证是许可人与被许可人之间的合同。
+                    被许可人违反许可证设定的义务时构成合同违约，根据具体情况还可能构成著作权侵权。
+                    我国合同法第122条规定，在违约与侵权构成责任竞合时，当事人需择一地主张权利。 
+                </p>
+                <li><strong>专利权</strong></li>
+                <p>
+                    开源软件许可证并不妨碍软件权利人将其技术申请专利。
+                    开源软件的专利风险主要分为外部风险和内部风险。外部风险指不受开源软件许可证约束的一方针对开源软件的使用者发起的专利请求。
+                    内部风险是开源软件的贡献者针对使用者发起的专利请求。
+                    <ul>
+                        <li><strong>明示的专利许可:</strong>可以较好地控制专利的内部风险。</li>
+                        <li><strong>默示的专利许可:</strong>被许可人认为权利人默示了被许可人对专利技术方案的实施。</li>
+                        <li><strong>专利权用尽:</strong>指知识产权权利人自己或者经其同意将含有知识产权的产品销售后，不能干预该产品的进一步销售，也不能干预购买者对相关有形产品的使用。 </li>
+                    </ul>
+                </p>
+                <li><strong>商标权</strong></li>
+                <p>
+                    无论在我国还是美国，在与软件和软件开发相关的类别中，OSI和/或其图形都是注册商标。
+                    这意味着一个许可证要得到OSI的认证后（符合OSI给出的有关开源的10个定义）才能使用OSI相关的标志，否则可能构成商标侵权。
+                    OSI是开源促进会（open source initiative）的简写，其维护着一个开源许可证列表（opensource.org/licenses）。 
+                </p>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="footer">
+            <p>by 贪得吴彦组</p>
+        </div>
+    </div>
+    </body>
+    </html> 

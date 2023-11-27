@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>licenses</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style3.css') }}"/>
+</head>
+<body>
+<div id="outer">
+	<div id="header">
+		<h1><a href="#">许可证信息</a></h1>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="http://202.121.180.97:30088/" accesskey="1" title="">Home</a></li>
+			<li><a href="http://202.121.180.97:30088/result?file={{file}}" accesskey="2" title="">开源供应链信息</a></li>
+			<li><a href="http://202.121.180.97:30088/licenses?file={{file}}" accesskey="3" title="">许可证信息</a></li>
+			<li><a href="http://202.121.180.97:30088/cves?file={{file}}" accesskey="4" title="">CVE漏洞</a></li>
+			<li><a href="http://202.121.180.97:30088/legitimacy?file={{file}}" accesskey="5" title="">合规性分析</a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<div id="tertiaryContent">
+			<h3>开源许可证</h3>
+			<p>开源软件的合规需要遵守各种（绝大多数为美国）私人自由软件团体制定的规则，即许可证（license）。
+				每个许可证都可以被看作是一份冗长的许可合同。</br>
+				<strong>在不选择许可证的情况下，著作权法等法律会发生效力，源代码不会自动进入公有领域。这意味着为某一项目做出贡献的相应源代码不能被他人修改或者发行。 </strong>
+			<h3>许可证兼容性与合规性</h3>
+				许可证兼容性是指能够将不同许可证授权的源代码组合到同一软件中。开源软件的开发通常组合多个基于不同许可证的源代码，
+				开源许可证兼容性研究对知道这开发者使用开源许可证有重要作用，可以帮助开发者判断是否可以将特定许可证下的作品组合到另一个许可证作品中。
+			</br></br>
+			开源软件的合规性风险，在法律上主要涉及到合同和著作权。在我国，开源软件许可证毫无争议地是许可人与被许可人之间的合同。 
+			被许可人在违反许可证设定的义务时构成合同违约，同时，根据具体情况还可能构成著作权侵权。一旦不合规，将给开源软件的应用带来很大的法律风险。
+			</p>
+			
+		</div>
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+				<h2>许可证信息及冲突性分析</h2>
+				<h3>许可证推导关系图</h3>
+				<img src="{{ url_for('static', filename = 'images/license_graph.jpg') }}" width="700" height="400"/>
+				{%if flag%}
+				<h3>项目本身许可证为{{project_license}}</br>下表为项目供应链涉及的许可证，以及是否与项目的许可证冲突</h3>
+				<table>
+					<tr class="rowH">
+						<th>许可证</th>
+						<th>许可证来源的包</th>
+						<th>是否与项目许可证冲突</th>
+					</tr>
+					{%for license in info%}
+					<tr class="rowA">
+						<td>{{license}}</td>
+						<td>
+							{%for each in info[license][0]%}
+							{{each}}
+							{%endfor%}
+						</td>
+						<td>{{info[license][1]}}</td>
+					</tr>
+					{%endfor%}	
+				</table>
+				{%else%}
+				<h3>并未检查到供应链中涉及的许可证</h3>
+				{%endif%}
+			</div>
+		</div>
+		<div id="secondaryContent">
+			<h3>许可证分类</h3>
+                <p>许可证通常可以分为<strong>著佐权许可证（copyleft license）以及宽松许可证（permissive license）</strong>。
+                    二者最大区别在于：在软件被修改并再发行时，著佐权许可证仍强制要求公开源代码（衍生软件需要开源）；
+                    而宽松许可证不要求公开源代码（衍生软件可以变为专有软件）。著佐权许可证还分为<strong>强著佐权许可证</strong>和<strong>弱著佐权许可证</strong>。
+				</p>
+			<h3>基于开源许可证推导图的兼容性分析</h3>
+			<p>右图是一些常用的开源许可证的兼容关系构成的一张推导图。在图中的两个点之间存在一条有向路径就代表二者的单向兼容关系。</br>
+				<strong>右图中，左侧标蓝色的许可证属于宽松型许可证，中间标绿色的属于弱著佐权许可证，右侧标黄色的属于强著佐权许可证</strong></br></br>
+				从供应链的分析中，进一步可以得到调用的包使用的许可证。已知项目本身的许可证，根据许可证推导图，对二者进行兼容性分析。
+				若找不到开源许可证到项目许可证的一条路径，则说明二者存在冲突，否则不存在。
+			</p>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<p>by 贪得吴彦组</p>
+	</div>
+</div>
+</body>
+</html> 

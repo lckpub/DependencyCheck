@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>CVEs</title>
+<meta name="keywords" content="licenses,yihaowangluo" />
+<meta name="description" content="none" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style2.css') }}"/>
+</head>
+<body>
+<div id="outer">
+	<div id="header">
+		<h1><a href="#">CVE漏洞</a></h1>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="http://202.121.180.97:30088/" accesskey="1" title="">Home</a></li>
+			<li><a href="http://202.121.180.97:30088/result?file={{file}}" accesskey="2" title="">开源供应链信息</a></li>
+			<li><a href="http://202.121.180.97:30088/licenses?file={{file}}" accesskey="3" title="">许可证信息</a></li>
+			<li><a href="http://202.121.180.97:30088/cves?file={{file}}" accesskey="4" title="">CVE漏洞</a></li>
+			<li><a href="http://202.121.180.97:30088/legitimacy?file={{file}}" accesskey="5" title="">合规性分析</a></li>
+		</ul>
+	</div>
+  <div id="content">
+    <div id="primaryContentContainer">
+			<div id="primaryContent">
+				<h2>相关CVE漏洞</h2>
+				<ul>
+          {% for pack in packs%}
+          <li>
+            <h3>包：{{pack[0]}},版本:{{pack[1]}}</h3>
+            {%if has_vul[pack[0]]==true%}
+            <table>
+              <tr class="rowH">
+                <th>漏洞ID</th>
+                <th>概述</th>
+                <th>CVSS评级</th>
+              </tr>
+              {%for hole in holes[pack[0]]%}
+              <tr class="rowA">
+                <td><a href="#">{{hole[0]}}</a></td>
+                <td>{{hole[1]}}</td>
+                <td>{{hole[2]}}</br>{{hole[3]}}</td>
+              </tr>  
+              {%endfor%}
+            </table>
+            {%endif%}
+          </li>
+          {% endfor %}
+				</ul>
+			</div>
+		</div>
+    <div id="secondaryContent">
+			<h3>展示CVE漏洞信息</h3>
+			<strong>若一个包下方没有显示漏洞信息表，说明没有找到该包该版本的漏洞信息。</strong></br></br>
+			<strong>若未能找到任何漏洞信息，有可能是因为网络连接原因，无法连接到数据库。</strong></br>
+			<a href='https://nvd.nist.gov/products/cpe/search/'>直接前往nvd数据库</a></br></br>
+			根据提供的包信息，展示这个包相应版本（若None则是所有版本）潜在的CVE漏洞。（有可能提供的包和版本无法在数据库中查找到已知漏洞）
+			</p>
+			
+			<ul>
+				一个漏洞的信息包括：
+				<li>该CVE漏洞的id</li>
+				<li>漏洞概述，包括发表时间</li>
+				<li>该漏洞的CVSS严重性评分和评级</li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+  <div id="footer">
+		<p>by 贪得吴彦组</p>
+	</div>    
+</div>
+</body>
+</html>
